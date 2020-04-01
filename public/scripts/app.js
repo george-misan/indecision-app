@@ -21,14 +21,15 @@ var onFormSubmit = function onFormSubmit(e) {
   render();
 };
 
-var removeAll = function removeAll(e) {
-  e.preventDefault();
+var removeAll = function removeAll() {
   app.options = [];
 
   render();
 };
 
 var appRoot = document.getElementById("app");
+
+var numbers = ["100", "203", "111"];
 
 var render = function render() {
   var template = React.createElement(
@@ -59,19 +60,24 @@ var render = function render() {
       { onClick: removeAll },
       "Remove all"
     ),
+    numbers.map(function (num) {
+      return React.createElement(
+        "p",
+        { key: num },
+        "Number: ",
+        num
+      );
+    }),
     React.createElement(
       "ol",
       null,
-      React.createElement(
-        "li",
-        null,
-        "Item one"
-      ),
-      React.createElement(
-        "li",
-        null,
-        "Item two"
-      )
+      app.options.map(function (option) {
+        return React.createElement(
+          "li",
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
       "form",
