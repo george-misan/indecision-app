@@ -2,11 +2,56 @@
 
 console.log("App.js is running");
 
+var app = {
+  title: "Indecision App",
+  subtitle: "Your decision today will affect your future",
+  options: ["One", "Two"]
+};
+
 var template = React.createElement(
-  "p",
+  "div",
   null,
-  "Does this change!"
+  React.createElement(
+    "h1",
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    "p",
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    "p",
+    null,
+    app.options.length > 0 ? "Here are your options" : "No options"
+  ),
+  React.createElement(
+    "ol",
+    null,
+    React.createElement(
+      "li",
+      null,
+      "Item one"
+    ),
+    React.createElement(
+      "li",
+      null,
+      "Item two"
+    )
+  ),
+  React.createElement(
+    "form",
+    { onSubmit: onFormSubmit },
+    React.createElement("input", { type: "text", name: "option" }),
+    React.createElement(
+      "button",
+      null,
+      "Add Option"
+    )
+  )
 );
+
 var appRoot = document.getElementById("app");
 
 ReactDOM.render(template, appRoot);
